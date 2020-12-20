@@ -14,9 +14,9 @@ jobs:
       matrix:
         include:
           - sm_version: "1.10.0"
-            base_url: "https://sm.alliedmods.net/smdrop/1.10/sourcemod-1.10.0-git6482-linux.tar.gz"
+            build_url: "https://sm.alliedmods.net/smdrop/1.10/sourcemod-1.10.0-git6482-linux.tar.gz"
           - sm_version: "1.11.0"
-            base_url: "https://sm.alliedmods.net/smdrop/1.11/sourcemod-1.11.0-git6526-linux.tar.gz"
+            build_url: "https://sm.alliedmods.net/smdrop/1.11/sourcemod-1.11.0-git6526-linux.tar.gz"
     steps:
       -
         name: Check out the repo
@@ -32,4 +32,4 @@ jobs:
         uses: docker/build-push-action@v2
         with:
           build-args: |
-            BASE_URL=${{ matrix.base_url }}
+            BUILD_URL=${{ matrix.build_url }}
