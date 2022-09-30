@@ -9,7 +9,7 @@ while read -r directory events filename; do
     
     echo -n "$( date +'%T' ) Compiling $sourcefile ... "
 
-    if ./spcomp $sourcefile -o/tmp/builds/$outfile | grep -i "error"; then
+    if ./spcomp $sourcefile -o/tmp/builds/$outfile --warnings-as-errors --use-stderr --show-stats | grep -i "error"; then
         echo "Failed"
     else
         echo "Success"

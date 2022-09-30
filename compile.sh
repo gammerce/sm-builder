@@ -7,7 +7,7 @@ for sourcefile in /tmp/sources/*.sp; do
 
     echo -n "$( date +'%T' ) Compiling $sourcefile ... "
   
-    if ./spcomp $sourcefile -o/tmp/builds/$outfile | grep -i "error"; then
+    if ./spcomp $sourcefile -o/tmp/builds/$outfile --warnings-as-errors --use-stderr --show-stats | grep -i "error"; then
         echo "Failed"
         exit 1
     else
