@@ -12,7 +12,7 @@ USER builder
 COPY compile.sh /tmp/compile.sh
 COPY watch.sh /tmp/watch.sh
 
-RUN LATEST_VERSION=$( curl -s https://sm.alliedmods.net/smdrop/$BUILD_VERSION/sourcemod-latest-linux )
+RUN export LATEST_VERSION=$( curl -s https://sm.alliedmods.net/smdrop/$BUILD_VERSION/sourcemod-latest-linux )
 RUN echo $LATEST_VERSION
 ENV BUILD_URL="https://sm.alliedmods.net/smdrop/$BUILD_VERSION/$LATEST_VERSION"
 RUN echo $BUILD_URL
