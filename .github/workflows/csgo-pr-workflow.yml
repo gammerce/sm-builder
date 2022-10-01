@@ -12,13 +12,17 @@ jobs:
     strategy:
       matrix:
         include:
-          - version: "1.10.0"
-            build_url: "https://sm.alliedmods.net/smdrop/1.10/sourcemod-1.10.0-git6482-linux.tar.gz"
-#          - version: "1.11.0"
-#            build_url: "https://sm.alliedmods.net/smdrop/1.11/sourcemod-1.11.0-git6911-linux.tar.gz"
-#          - version: "1.12.0"
-#            build_url: "https://sm.alliedmods.net/smdrop/1.12/sourcemod-1.12.0-git6925-linux.tar.gz"
+          - version: "1.10."
+#          - version: "1.11"
+#          - version: "1.12"
     steps:
+      - name: Maximize build space
+        uses: easimon/maximize-build-space@master
+        with:
+          root-reserve-mb: 512
+          swap-size-mb: 1024
+          remove-dotnet: 'true'
+
       - name: Check out the repo
         uses: actions/checkout@v2
       
@@ -53,5 +57,3 @@ jobs:
           context: ./csgo
           push: true
           tags: budziam/csgo:${{ matrix.version }}-${{ steps.vars.outputs.sha_short }}
-          build-args: |
-            BUILD_URL=${{ matrix.build_url }}
