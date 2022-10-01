@@ -12,13 +12,12 @@ USER builder
 COPY compile.sh /tmp/compile.sh
 COPY watch.sh /tmp/watch.sh
 
-RUN export LATEST_VERSION=$( curl -s https://sm.alliedmods.net/smdrop/$BUILD_VERSION/sourcemod-latest-linux )
-RUN echo $LATEST_VERSION
-ENV BUILD_URL="https://sm.alliedmods.net/smdrop/$BUILD_VERSION/$LATEST_VERSION"
-RUN echo $BUILD_URL
-
 WORKDIR /tmp
-RUN wget -O build.tar.gz "${BUILD_URL}"
+RUN LATEST_VERSION=$( curl -s https://sm.alliedmods.net/smdrop/$BUILD_VERSION/sourcemod-latest-linux ) \
+    && echo $LATEST_VERSION \
+    && BUILD_URL="https://sm.alliedmods.net/smdrop/$BUILD_VERSION/$LATEST_VERSION" \
+    && echo $BUILD_URL \
+    && wget -O build.tar.gz "${BUILD_URL}"
 RUN tar -xzf build.tar.gz
 
 WORKDIR /tmp/addons/sourcemod/scripting
