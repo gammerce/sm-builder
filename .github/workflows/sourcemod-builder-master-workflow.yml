@@ -1,11 +1,13 @@
-name: Build docker image
+name: Sourcemod Builder Pull Request Workflow
 on:
-  pull_request:
+  push:
     branches:
       - master
+    paths:
+      - sourcemod-builder/**
 jobs:
   main:
-    name: Build docker image
+    name: Build and push docker image to Docker Hub
     runs-on: ubuntu-latest
     strategy:
       matrix:
@@ -20,10 +22,6 @@ jobs:
       - name: Check out the repo
         uses: actions/checkout@v2
       
-      - name: Get commit SHA
-        id: vars
-        run: echo "::set-output name=sha_short::$(git rev-parse --short HEAD)"
-
       - name: Set up QEMU
         uses: docker/setup-qemu-action@v1
       
@@ -39,7 +37,8 @@ jobs:
       - name: Build and push to Docker Hub
         uses: docker/build-push-action@v2
         with:
+          context: ./sourcemod-builder
           push: true
-          tags: budziam/sourcemod-builder:${{ matrix.sm_version }}-${{ steps.vars.outputs.sha_short }}
+          tags: budziam/sourcemod-builder:${{ matrix.sm_version }}
           build-args: |
             BUILD_URL=${{ matrix.build_url }}
