@@ -42,14 +42,12 @@ jobs:
           username: ${{ secrets.DOCKERHUB_USERNAME }}
           password: ${{ secrets.DOCKERHUB_TOKEN }}
 
-      - name: Cache csgo
-        id: cache-csgo
-        uses: actions/cache@v3
-        with:
-          path: /tmp/csgo
-          key: csgo
-          restore-keys: |
-            csgo
+#      - name: Cache csgo
+#        id: cache-csgo
+#        uses: actions/cache@v3
+#        with:
+#          path: /tmp/csgo
+#          key: csgo
 
       - name: Build and push to Docker Hub
         uses: docker/build-push-action@v2
