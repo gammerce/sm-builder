@@ -16,12 +16,12 @@ jobs:
 #          - version: "1.11"
 #          - version: "1.12"
     steps:
-      - name: Maximize build space
-        uses: easimon/maximize-build-space@master
-        with:
-          root-reserve-mb: 512
-          swap-size-mb: 1024
-          remove-dotnet: 'true'
+#      - name: Maximize build space
+#        uses: easimon/maximize-build-space@master
+#        with:
+#          root-reserve-mb: 512
+#          swap-size-mb: 1024
+#          remove-dotnet: 'true'
 
       - name: Check out the repo
         uses: actions/checkout@v2
