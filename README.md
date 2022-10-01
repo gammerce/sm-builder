@@ -1,2 +1,2 @@
-SM builder ![Build](https://github.com/gammerce/sourcemod-builder/workflows/Build%20docker%20image/badge.svg)
+Image Builder ![Build](https://github.com/gammerce/image-builder/workflows/Build%20docker%20image/badge.svg)
 ===
