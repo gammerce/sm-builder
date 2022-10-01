@@ -1,10 +1,10 @@
-name: Sourcemod Builder Pull Request Workflow
+name: Amxmodx Builder Pull Request Workflow
 on:
   pull_request:
     branches:
       - master
     paths:
-      - sourcemod-builder/**
+      - amxmodx-builder/**
 jobs:
   main:
     name: Build docker image
@@ -12,12 +12,14 @@ jobs:
     strategy:
       matrix:
         include:
+          - version: "1.8.2"
+            build_url: "https://www.amxmodx.org/release/amxmodx-1.8.2-base-linux.tar.gz"
+          - version: "1.8.3"
+            build_url: "https://www.amxmodx.org/amxxdrop/1.8/amxmodx-1.8.3-dev-git5201-base-linux.tar.gz"
+          - version: "1.9.0"
+            build_url: "https://www.amxmodx.org/amxxdrop/1.9/amxmodx-1.9.0-git5241-base-linux.tar.gz"
           - version: "1.10.0"
-            build_url: "https://sm.alliedmods.net/smdrop/1.10/sourcemod-1.10.0-git6482-linux.tar.gz"
-          - version: "1.11.0"
-            build_url: "https://sm.alliedmods.net/smdrop/1.11/sourcemod-1.11.0-git6911-linux.tar.gz"
-          - version: "1.12.0"
-            build_url: "https://sm.alliedmods.net/smdrop/1.12/sourcemod-1.12.0-git6925-linux.tar.gz"
+            build_url: "https://www.amxmodx.org/amxxdrop/1.10/amxmodx-1.10.0-git5392-base-linux.tar.gz"
     steps:
       - name: Check out the repo
         uses: actions/checkout@v2
@@ -41,8 +43,8 @@ jobs:
       - name: Build and push to Docker Hub
         uses: docker/build-push-action@v2
         with:
-          context: ./sourcemod-builder
+          context: ./amxmodx-builder
           push: true
-          tags: budziam/sourcemod-builder:${{ matrix.version }}-${{ steps.vars.outputs.sha_short }}
+          tags: budziam/amxmodx-builder:${{ matrix.version }}-${{ steps.vars.outputs.sha_short }}
           build-args: |
             BUILD_URL=${{ matrix.build_url }}
