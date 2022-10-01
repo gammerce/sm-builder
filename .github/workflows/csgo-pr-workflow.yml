@@ -16,12 +16,16 @@ jobs:
 #          - version: "1.11"
 #          - version: "1.12"
     steps:
-#      - name: Maximize build space
-#        uses: easimon/maximize-build-space@master
-#        with:
-#          root-reserve-mb: 512
-#          swap-size-mb: 1024
-#          remove-dotnet: 'true'
+      - name: Clean up space
+        shell: bash
+        run: |
+          echo "=== Before ==="
+          df -h /
+          sudo rm -rf /usr/local/lib/android
+          sudo rm -rf /usr/share/dotnet
+          sudo rm -rf /opt/ghc
+          echo "=== After ==="
+          df -h /
 
       - name: Check out the repo
         uses: actions/checkout@v2
