@@ -4,6 +4,7 @@ on:
     branches:
       - master
     paths:
+      - .github/workflows/amxmodx-builder-master-workflow.yml
       - amxmodx-builder/**
 jobs:
   main:
